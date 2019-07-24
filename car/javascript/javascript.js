@@ -50,4 +50,3 @@ $("p").on("click", function() {
 })
 
 initial()
-

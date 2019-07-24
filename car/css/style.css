@@ -2,13 +2,7 @@ html {
 	box-sizing: border-box;
 }
 
-body { 
-	min-height: 100vh;
-    background: url("./images/background.jpeg");
-    background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: scroll;
-}
+
 
 h3 {
 	margin: 20px 0px 10px 0px;
@@ -20,8 +14,8 @@ h3 {
 	color: black;
 }
 
-h1, h3, #magicNumber, #yourScore, #wins, #losses, .score {
-	color: #5073aa;
+h1, h3, #magicNum, #yourScore, #wins, #losses, .score {
+	color:#B61470;
 }
 
 h1 {
@@ -30,8 +24,8 @@ h1 {
 	letter-spacing: 10px;
 }
 
-#images{
-    margin: 50px auto;
+.button{
+	border: none;
 }
 .crystalimg {
     width: 125px;
@@ -55,9 +49,6 @@ h1 {
 
 
 
-#winOrLose {
-	color: #a182bc;
-}
 
 .total, .scores, .directions {
 	margin: auto;
