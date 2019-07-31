@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Animal giphy</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <style type="text/css">
+  body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #696969;
+  }
+  .container{
+    text-align: center;
+
+  }
+  #button{
+    background-color: #e7e7e7; color: black;
+    font-size: 16px;
+  }
+  #head{
+    font-size: 30px;
+  }
+   
+  </style>
+</head>
+
+<body>
+
+  <div class="container" style="background: transparent;">
+    <div id="head"> 
+      <h1 class="text-center">Animals</h1>
+    </div>
+
+    
+    <div id="animal-buttons"> </div>
+    
+    <div class="container" id="btn">
+        <form id="animal-form">
+            <label id="add" for="animal-input">animal</label>
+            <input type="text" class="form-control" id="animal-input">
+            
+        </form>
+        <button onclick="submitButtonClicked()" type="button" id="add-athlete" class="btn btn-success">Search</button>
+        
+        <div id="animal"> </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+var animals = ["dogs", "cats", "birds", "fish"];
+
+$(document).ready(function() {
+    for (var i = 0; i < animals.length; i++) {
+        $("#animal-buttons").append("<button onclick='searchGif(\"" + animals[i] + "\")'  value=' " + animals[i] + "'> " + animals[i] + " </button>");
+    }
+});
+
+function athleteButtonClicked() {
+    var userInput = $('#animal-input').val();
+    searchGif(userInput);
+}
+
+function submitButtonClicked() {
+    var userInput = $('#animal-input').val();
+
+    if (userInput) {
+        $('#animal-buttons').append("<button type='button' onclick='searchGif(\"" + userInput + "\")' class='btn btn-primary' value=' " + userInput + "'> " + userInput + " </button>");
+    }
+}
+
+function searchGif(gifName) {
+    $.ajax({
+            url: 'https://api.giphy.com/v1/gifs/search?q= ' + gifName + ' &api_key=fbEe6LPcH9yL0ZhRh9rauDMhUN8CwALi',
+            type: 'GET',
+        })
+        .done(function(response) {
+            displayGif(response);
+        })
+}
+
+function displayGif(response) {
+    $('#animal').empty();
+    for (var i = 0; i < response.data.length; i++) {
+        var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
+        var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
+            '" data-still=" ' + response.data[i].images.fixed_height_still.url +
+            ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
+
+        image = '<div class="col-md-4">' + image + "</div>";
+        $('#animal').append(image);
+    }
+
+    $('.movImage').on('click', function() {
+        var state = $(this).attr('data-state');
+        if (state == 'still') {
+            $(this).attr('src', $(this).attr("data-animate"));
+            $(this).attr('data-state', 'animate');
+        } else {
+            $(this).attr('src', $(this).attr("data-still"));
+            $(this).attr('data-state', 'still');
+        }
+
+    });
+}</script>
+
+</body>
+
+</html>

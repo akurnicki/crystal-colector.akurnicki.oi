@@ -1,17 +1,18 @@
 function initial() {
     var cc = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
     $("#magicNumber").text(cc);
+    $("#yourScore").text(0);
     crystalGenerator()
 }
 
-function crystalGenerator(){
-    for (var i= 0; i < 4; i++){
-        var crystalNum = Math.floor(Math.random() * (12 - 1 + 1)) + 1;
-        
+function crystalGenerator() {
+    for (var i = 0; i < 4; i++) {
+        var crystalNum = Math.floor(Math.random() * (12)) + 1;
         var crystalName = "#crystal" + i;
-    
-        $(crystalName).attr("data-value", crystalNum); 
+
+        $(crystalName).attr("data-value", crystalNum);
     }
+    console.log(crystalNum);
 }
 
 function checkGameStatus() {
@@ -21,13 +22,14 @@ function checkGameStatus() {
     magicNumber = parseInt(magicNumber);
 
 
+    console.log(yourScore, magicNumber)
     if (yourScore == magicNumber) {
         var wins = $("#wins").text()
         wins = parseInt(wins);
         wins++;
         $("#wins").text(wins);
         reset();
-    }else if (yourScore > magicNumber) {
+    } else if (yourScore > magicNumber) {
         var losses = $("#losses").text()
         losses = parseInt(losses);
         losses++;
@@ -36,12 +38,12 @@ function checkGameStatus() {
     }
 }
 
-function reset(){
+function reset() {
     $("#yourScore").text(0);
     initial();
 }
 
-$("p").on("click", function() {
+$("p").on("click", function () {
     var count = $("#yourScore").text()
     count = parseInt(count);
     count += parseInt($(this).attr("data-value"));
@@ -49,4 +51,7 @@ $("p").on("click", function() {
     checkGameStatus()
 })
 
+
+$("#losses").text(0);
+$("#wins").text(0);
 initial()

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Movies</title>
+  <style type="text/css">
+    #movieInfo div {
+      border: 1px solid black;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>animal Search</h1>
+
+    <!-- Movies will get dumped here -->
+    <div id="buttons-view"></div>
+
+    <form id="animal-form">
+      <label for="animal-input">Add a Movie, Yo!</label>
+      <input type="text" id="animal-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <input id="add-animal" type="submit" value="Add an animal">
+    </form>
+
+    <div id="animalInfo"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    var animals= ["dog", "cat", "bird", "horse", "mouse", "iguana"];
+
+    function renderButtons() {
+        $("#buttons-view").empty();
+
+        for(var i=0; i<animals.length; i++){
+            createButton(animals[i]);
+        }
+
+    }
+    function createButton(aName){
+        var b = $("<button>");
+            b.attr("class","bAnimal")
+            b.text(aName);
+            $("#buttons-view").append(b);
+    }
+    $(document).on("click", "bAnimal", function(){
+        var animalName= $(this).text();
+    })
+
+    </script>
+  </div>
+</body>
+
+</html>
